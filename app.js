@@ -38,8 +38,7 @@ const game = {
           break
         }
       }
-      this.prevGuesses.push(parseInt(guess)) 
-      console.log("prev guess: ", this.prevGuesses)
+      return parseInt(guess)
     },
 
       
@@ -48,12 +47,33 @@ const game = {
     play: function() {
       this.secretNum = Math.floor(Math.random() * 
         (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
-        
+      guess = this.getGuess()
+      while (guess != this.secretNum) {
+        console.log("guess: " + guess + "secret num: " + this.secretNum)
+        if (guess == this.secretNum) {
+          break
+        }
+        this.prevGuesses.push(guess) 
+        console.log("prev guess: ", this.prevGuesses)
+        console.log("guess", guess)
+        guess = this.getGuess()
     }
+    this.render()
+    },
+    render: function() {
+      var numGuesses = 0
+      for (i = 1; i <= this.prevGuesses.length; i++) {
+        numGuesses += 1
+      }
+      if (this.prevGuesses.length == 1) {
+        alert("Congrats! You guessed the number in " + numGuesses + " guess!")
+      }
+      alert("Congrats! You guessed the number in " + numGuesses + " guesses!")
+    } 
   }
   
 
-game.getGuess()
+game.play()
 //console.log("Guess", guess)
 
   
