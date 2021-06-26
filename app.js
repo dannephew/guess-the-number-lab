@@ -56,21 +56,31 @@ const game = {
         this.prevGuesses.push(guess) 
         console.log("prev guess: ", this.prevGuesses)
         console.log("guess", guess)
+        this.render()
         guess = this.getGuess()
     }
+    console.log("play:  guess" + guess + "secretNum" + this.secretNum)
     this.render()
+    console.log("end of play")
     },
     render: function() {
-      var numGuesses = 0
-      for (i = 1; i <= this.prevGuesses.length; i++) {
-        numGuesses += 1
+      console.log("render:  guess" + guess + "secretNum" + this.secretNum)
+      if (guess == this.secretNum) {
+        console.log("render if")
+        var numGuesses = 0
+        for (i = 1; i <= this.prevGuesses.length; i++) {
+          numGuesses += 1
+        }
+        numGuesses +=1
+        alert("Congrats! You guessed the number in " + numGuesses + " guesses!")
+      } else if (guess > this.secretNum) {
+        alert("Your guess is too high. Previous guesses: " + this.prevGuesses.join(", ") + ".")
+      } else if (guess < this.secretNum) {
+        alert("Your guess is too low. Previous guesses: " + this.prevGuesses.join(", ") + ".")
       }
-      if (this.prevGuesses.length == 1) {
-        alert("Congrats! You guessed the number in " + numGuesses + " guess!")
-      }
-      alert("Congrats! You guessed the number in " + numGuesses + " guesses!")
-    } 
+
   }
+}
   
 
 game.play()
